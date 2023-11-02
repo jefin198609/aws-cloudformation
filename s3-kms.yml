@@ -32,7 +32,9 @@ Resources:
         LogFilePrefix: testing-logs
       Tags:                       # tags for the bucket
         - Key: "Environment"
-          Value: "test"           
+          Value: "dev" 
+        - Key: "Environment"
+          Value: "test"            
       BucketEncryption:           # use the newly created KMS key for encryption
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
