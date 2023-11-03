@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+  build:
+    commands:
+      - echo "hai BCBSA" 
+      - aws cloudformation validate-template --template-body file://s3-kms.yaml
