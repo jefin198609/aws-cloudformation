@@ -38,7 +38,7 @@ Parameters:
     Description: "ARN of the KMS master key for bucket encryption"
 
 Resources:
-jtestbucket:
+  jtestbucket:
     Type: 'AWS::S3::Bucket'
     Properties:
       VersioningConfiguration:
