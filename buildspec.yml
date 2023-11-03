@@ -10,8 +10,9 @@ phases:
       - ./aws/install
   pre_build:
     commands:
-      - aws --version  # Verify AWS CLI installation
+      - aws --version  
   build:
     commands:
       - aws cloudformation validate-template --template-body file://s3-kms.yml
+
 
