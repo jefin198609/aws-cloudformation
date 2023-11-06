@@ -31,11 +31,12 @@ Parameters:
   EncryptionSSEAlgorithm:
     Type: String
     Description: "SSE algorithm for bucket encryption"
-    Default: "AES256"
+    Default: "aws:kms"
     AllowedValues: ["aws:kms", "AES256"]
   KMSMasterKeyID:
     Type: String
     Description: "ARN of the KMS master key for bucket encryption"
+    Default: "arn:aws:kms:us-east-1:872389479602:key/272ded58-3371-4a70-a8d5-a0a652e6f21e"
 
 Resources:
   jtestbucket:
