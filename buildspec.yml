@@ -11,7 +11,7 @@ phases:
       - aws --version  
   build:
     commands:
-      - aws cloudformation validate-template --template-body file://s3-param.yml
+      - aws cloudformation validate-template --template-body file://s3-kms.yml
       - echo "validation completed"
 
 

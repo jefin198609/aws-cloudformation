@@ -11,15 +11,6 @@ Resources:
       VersioningConfiguration:     # versioning
         Status: Enabled
       AccessControl: Private
-      # LifecycleConfiguration:      # S3 lifecycle
-      #   Rules:
-      #     - Id: GlacierRule
-      #       Prefix: glacier
-      #       Status: Enabled
-      #       ExpirationInDays: 365
-      #       Transitions:
-      #         - TransitionInDays: 1
-      #           StorageClass: GLACIER
       LifecycleConfiguration:      # S3 lifecycle
         Rules:
           - Id: StandardRule  # Updated rule ID for the standard storage class
