@@ -31,7 +31,7 @@ Parameters:
   EncryptionSSEAlgorithm:
     Type: String
     Description: "SSE algorithm for bucket encryption"
-    Default: "aws:kms"
+    Default: "AES256"
     AllowedValues: ["aws:kms", "AES256"]
   KMSMasterKeyID:
     Type: String
