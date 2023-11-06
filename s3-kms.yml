@@ -5,56 +5,56 @@ Resources:
   jtestkmskey: # Create a new KMS key
     Type: 'AWS::KMS::Key'
 
-  jtestbucket:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      VersioningConfiguration:     # versioning
-        Status: Enabled
-      AccessControl: Private
-      LifecycleConfiguration:      # S3 lifecycle
-        Rules:
-          - Id: StandardRule  # Updated rule ID for the standard storage class
-            Status: Enabled
-            Prefix: ""  # Empty prefix means the rule applies to all objects in the bucket
-            Transitions:
-              - TransitionInDays: 30
-                StorageClass: STANDARD_IA  # Use STANDARD_IA for infrequent access storage class
-      LoggingConfiguration:       # server access log enable
-        LogFilePrefix: testing-logs
-      Tags:                       # tags for the bucket
-        - Key: "Environment"
-          Value: "dev" 
-        - Key: "Environment"
-          Value: "test"            
-      BucketEncryption:           # use the newly created KMS key for encryption
-        ServerSideEncryptionConfiguration:
-          - ServerSideEncryptionByDefault:
-              SSEAlgorithm: 'aws:kms'
-              KMSMasterKeyID: !GetAtt jtestkmskey.KeyId  # Reference the ID of the new KMS key
+#   jtestbucket:
+#     Type: 'AWS::S3::Bucket'
+#     Properties:
+#       VersioningConfiguration:     # versioning
+#         Status: Enabled
+#       AccessControl: Private
+#       LifecycleConfiguration:      # S3 lifecycle
+#         Rules:
+#           - Id: StandardRule  # Updated rule ID for the standard storage class
+#             Status: Enabled
+#             Prefix: ""  # Empty prefix means the rule applies to all objects in the bucket
+#             Transitions:
+#               - TransitionInDays: 30
+#                 StorageClass: STANDARD_IA  # Use STANDARD_IA for infrequent access storage class
+#       LoggingConfiguration:       # server access log enable
+#         LogFilePrefix: testing-logs
+#       Tags:                       # tags for the bucket
+#         - Key: "Environment"
+#           Value: "dev" 
+#         - Key: "Environment"
+#           Value: "test"            
+#       BucketEncryption:           # use the newly created KMS key for encryption
+#         ServerSideEncryptionConfiguration:
+#           - ServerSideEncryptionByDefault:
+#               SSEAlgorithm: 'aws:kms'
+#               KMSMasterKeyID: !GetAtt jtestkmskey.KeyId  # Reference the ID of the new KMS key
 
 
-  jtestBucketPolicy:
-    Type: 'AWS::S3::BucketPolicy'
-    Properties:
-      Bucket: !Ref jtestbucket
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Action:
-              - 's3:PutObject'
-            Effect: Allow
-            Principal:
-              Service: logging.s3.amazonaws.com
-            Resource: !Join 
-              - ''
-              - - 'arn:aws:s3:::'
-                - !Ref jtestbucket
-                - /*
-            Condition:
-              StringEquals:
-                'aws:SourceAccount': !Sub '${AWS::AccountId}'
+#   jtestBucketPolicy:
+#     Type: 'AWS::S3::BucketPolicy'
+#     Properties:
+#       Bucket: !Ref jtestbucket
+#       PolicyDocument:
+#         Version: 2012-10-17
+#         Statement:
+#           - Action:
+#               - 's3:PutObject'
+#             Effect: Allow
+#             Principal:
+#               Service: logging.s3.amazonaws.com
+#             Resource: !Join 
+#               - ''
+#               - - 'arn:aws:s3:::'
+#                 - !Ref jtestbucket
+#                 - /*
+#             Condition:
+#               StringEquals:
+#                 'aws:SourceAccount': !Sub '${AWS::AccountId}'
 
-Outputs:
-  BucketName:
-    Description: "Name of the created S3 bucket"
-    Value: !Ref jtestbucket
+# Outputs:
+#   BucketName:
+#     Description: "Name of the created S3 bucket"
+#     Value: !Ref jtestbucket
