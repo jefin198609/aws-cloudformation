@@ -13,8 +13,6 @@ phases:
     commands:
       - aws cloudformation validate-template --template-body file://s3-kms.yml
       - echo "validation completed"
-artifacts:
-  files:
-    - buildartifact
+
 
 
