@@ -15,6 +15,6 @@ phases:
       - echo "validation completed"
 artifacts:
   files:
-    - buildartifact/s3-kms.zip
+    - buildartifact
 
 
